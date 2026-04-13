@@ -37,3 +37,19 @@ def main():
 
 if __name__ == "__main__":
     main()
+def main():
+    nums = unordered_sequence(20)
+    sorted_nums = ordered_sequence(20)
+    dna = dna_sequence(100)
+
+    print("Unsorted:", nums)
+    print("Sorted:", sorted_nums)
+    print("DNA:", dna)
+
+    print("\nLinear search:", linear_search(nums, nums[3]))
+    print("Binary search:", binary_search(sorted_nums, sorted_nums[5]))
+    print("Pattern search:", pattern_search(dna, dna[10:15]))
+
+
+if __name__ == "__main__":
+    main()
