@@ -53,3 +53,41 @@ def main():
 
 if __name__ == "__main__":
     main()
+data = read_data("data.json", "unordered_numbers")
+    sorted_data = read_data("data.json", "ordered_numbers")
+    dna = read_data("data.json", "dna_sequence")
+
+    sizes = [100, 500, 1000, 5000, 10000]
+
+    linear_times = []
+    binary_times = []
+    set_times = []
+
+    for n in sizes:
+        # simulujeme rôzne veľkosti zo vstupu JSON
+        sample = data[:min(n, len(data))]
+        sorted_sample = sorted_data[:min(n, len(sorted_data))]
+
+        target = sample[len(sample) // 2]
+        s = set(sample)
+
+        linear_times.append(measure(linear_search, sample, target))
+        binary_times.append(measure(binary_search, sorted_sample, target))
+        set_times.append(measure(set_search, s, target))
+
+        print(f"Hotovo n = {n}")
+
+    # -------------------------
+    # GRAF
+    # -------------------------
+
+    plt.plot(sizes, linear_times, label="Linear search")
+    plt.plot(sizes, binary_times, label="Binary search")
+    plt.plot(sizes, set_times, label="Set search")
+
+    plt.xlabel("Veľkosť vstupu")
+    plt.ylabel("Čas (sekundy)")
+    plt.title("Porovnanie algoritmov vyhľadávania")
+    plt.legend()
+
+    plt.show(
